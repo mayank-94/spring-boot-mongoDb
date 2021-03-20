@@ -14,5 +14,8 @@ import com.spring.boot.productservice.dto.Product;
 public interface ProductService {
 	
 	List<Product> getAllProducts();
-	Product getProductById();
+	Product getProductById(Integer id);
+	void addProduct(Product product);
+	List<Product> getProductsByCategory(String category);
+	void deleteProductById(Integer id);
 }

@@ -25,13 +25,12 @@ import lombok.ToString;
 @Builder
 @Document(collection = "product")
 public class Product {
-	
 	@Id
 	private Integer id;
 	private String name;
-	private Category vategory;
+	private Category category;
+	private String currency;
 	private Double price;
 	private Double discount;
 	private String discountDescription;
-	
 }
