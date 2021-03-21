@@ -5,6 +5,8 @@ package com.spring.boot.productservice.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,7 +42,7 @@ public class ProductController {
 	}
 	 
 	@PostMapping(value="/products", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Product> createProduct(@RequestBody Product product){
+	public ResponseEntity<Product> createProduct(@RequestBody @Valid Product product){
 		
 		productServcie.addProduct(product);
 		log.info("----Product added successfully----");
@@ -64,7 +66,7 @@ public class ProductController {
 	}
 	
 	@GetMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Product> getProductById(@PathVariable Integer id){
+	public ResponseEntity<Product> getProductById(@PathVariable String id){
 		
 		Product product = productServcie.getProductById(id);
 		log.info("----Product with id, {} is fetched successfully", id);
@@ -72,7 +74,7 @@ public class ProductController {
 	}
 	
 	@DeleteMapping(value = "/products/{id}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable Integer id){
+	public ResponseEntity<Void> deleteProduct(@PathVariable String id){
 		
 		productServcie.deleteProductById(id);
 		log.info("----Product with id, {} is deleted successfully", id);

@@ -3,6 +3,9 @@
  */
 package com.spring.boot.productservice.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,11 +29,19 @@ import lombok.ToString;
 @Document(collection = "product")
 public class Product {
 	@Id
-	private Integer id;
+	private String id;
+	
+	@NotNull(message = "Prdouct name should not be null")
 	private String name;
+	
+	@NotNull(message = "Category can't be null")
 	private Category category;
 	private String currency;
+	
+	@Min(0)
 	private Double price;
+	
+	@Min(0)
 	private Double discount;
 	private String discountDescription;
 }

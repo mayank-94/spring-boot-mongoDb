@@ -16,7 +16,7 @@ import com.spring.boot.productservice.dto.Product;
  *
  */
 @Repository
-public interface Productrepository extends MongoRepository<Product, Integer>{
+public interface Productrepository extends MongoRepository<Product, String>{
 	
 	@Query("{'Category.name':?0}")
 	List<Product> findByCategory(String category);
