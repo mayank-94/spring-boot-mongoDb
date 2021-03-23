@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,8 +29,10 @@ import lombok.ToString;
 @ToString
 @Builder
 @Document(collection = "product")
+@ApiModel("Contains the fields of Product")
 public class Product {
 	@Id
+	@ApiModelProperty("Unique Id of product, generated automatically")
 	private String id;
 	
 	@NotNull(message = "Prdouct name should not be null")

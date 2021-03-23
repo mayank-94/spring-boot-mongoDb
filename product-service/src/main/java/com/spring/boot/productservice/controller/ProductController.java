@@ -23,6 +23,9 @@ import com.spring.boot.productservice.constants.RestConstants;
 import com.spring.boot.productservice.dto.Product;
 import com.spring.boot.productservice.service.ProductService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -32,6 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping(value = RestConstants.BASE_URL)
 @Slf4j
+@Api
 public class ProductController {
 	
 	private final ProductService productServcie;
@@ -40,7 +44,8 @@ public class ProductController {
 	public ProductController(ProductService productService) {
 		this.productServcie = productService;
 	}
-	 
+	
+	@ApiOperation("Add product to DB")
 	@PostMapping(value="/products", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Product> createProduct(@RequestBody @Valid Product product){
 		
@@ -49,6 +54,7 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(product);
 	}
 	
+	@ApiOperation("Get all products")
 	@GetMapping(value="/products", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Product>> getAllProducts(){
 		
@@ -57,24 +63,33 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.OK).body(products);
 	}
 	
+	@ApiOperation("Get all products by category")
 	@GetMapping(value="/products/category/{category}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category){
+	public ResponseEntity<List<Product>> getProductsByCategory(
+			@ApiParam(name = "Category by which product is to be searched")
+			@PathVariable String category){
 		
 		List<Product> products = productServcie.getProductsByCategory(category);
 		log.info("----Products Fetched Successfully By Category----");
 		return ResponseEntity.status(HttpStatus.OK).body(products);
 	}
 	
+	@ApiOperation("Get product by Id")
 	@GetMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Product> getProductById(@PathVariable String id){
+	public ResponseEntity<Product> getProductById(
+			@ApiParam("Id by which product is to be searched")
+			@PathVariable String id){
 		
 		Product product = productServcie.getProductById(id);
 		log.info("----Product with id, {} is fetched successfully", id);
 		return ResponseEntity.status(HttpStatus.OK).body(product);
 	}
 	
+	@ApiOperation("Delete product by Id")
 	@DeleteMapping(value = "/products/{id}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable String id){
+	public ResponseEntity<Void> deleteProduct(
+			@ApiParam("Id by which product is to be deleted") 
+			@PathVariable String id){
 		
 		productServcie.deleteProductById(id);
 		log.info("----Product with id, {} is deleted successfully", id);

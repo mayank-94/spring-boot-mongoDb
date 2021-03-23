@@ -3,6 +3,7 @@
  */
 package com.spring.boot.productservice.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
+@ApiModel("Contains fields of Category")
 public class Category {
 	
 	private Integer id;
