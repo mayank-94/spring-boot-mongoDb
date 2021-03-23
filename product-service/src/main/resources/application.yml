@@ -11,13 +11,31 @@ spring:
       port: 27017
       database: shopping
       
+  boot:
+    admin:
+      client:
+        url:
+        - http://localhost:8081
+
+#Logging      
 logging:
   file:
     name: C:\Users\mayankjain02\Downloads\logs\product.log
     
   logback:
     rollingpolicy:
-      max-file-size: 1 MB        
+      max-file-size: 1 MB   
+      
+#Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - info
+        - health
+        - beans
+        - httptrace     
 
 #Valid Currencies      
 product:

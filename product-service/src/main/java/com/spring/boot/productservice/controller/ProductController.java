@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ProductController {
 	
-	private ProductService productServcie;
+	private final ProductService productServcie;
 	
 	@Autowired
 	public ProductController(ProductService productService) {

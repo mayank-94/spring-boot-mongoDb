@@ -23,8 +23,8 @@ import com.spring.boot.productservice.repo.Productrepository;
 @Service
 public class ProductServiceImpl implements ProductService {
 	
-	private Productrepository prodRepo;
-	private CurrencyConfiguration currencyConfiguration;
+	private final Productrepository prodRepo;
+	private final CurrencyConfiguration currencyConfiguration;
 	
 	@Autowired
 	public ProductServiceImpl(Productrepository prodRepo, CurrencyConfiguration currencyConfiguration) {
